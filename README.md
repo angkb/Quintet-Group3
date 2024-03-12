@@ -85,6 +85,22 @@ ____________________________________________________________
 ## Scenario
 You are working in a unicorn startup and they are rapidly scaling their products to markets in several regions. Due to the market competition, security vulnerabilities screening has always been hindering the product release. You are tasked to turn the current DevOps Pipeline into DevSecOps. This means that you are to implement relevant security measures at each stage of the CICD Pipeline. In this project, you will be required to set up a simple CICD pipeline while focusing on the security measures introduced to it.
 
+
+Quintet wellness and Healthcare.
+
+Providing wellness and healthcare services to you at your doorstep, at comfort place.
+
+We provide various exercise and wellness programmes for individuals and for group/corporate activities.
+We also here to provide nursing services and confinement services in near future.
+
+Our highly qualified team will help you to achieve your goals with structured, scientific and fun classes, workshops and events.
+
+Please follow us on our Instagram and contact us to book our services now. ❤️
+
+PS
+We can add testimonial/kind words about company services and experiences from
+customers
+
 ____________________________________________________________
 ## Getting Started (What)
 To host a simple HTML file on an S3 static website, you can use a CI/CD pipeline to create an S3 bucket using Terraform. 
