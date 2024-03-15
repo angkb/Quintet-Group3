@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "bucket" {
   bucket_prefix = var.bucket_prefix #prefix appends with timestamp to make a unique identifier
   tags = {
     "Project"   = "Use CloudFront with s3"
-    "ManagedBy" = "Fantastic 5"
+    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
   }
   force_destroy = true
 }

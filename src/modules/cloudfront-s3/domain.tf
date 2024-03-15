@@ -6,7 +6,7 @@ resource "aws_acm_certificate" "cert" {
 
   tags = {
     "Project"   = "Use CloudFront with s3"
-    "ManagedBy" = "Quintet-Grp3"
+    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
   }
 }
 # validate cert:
