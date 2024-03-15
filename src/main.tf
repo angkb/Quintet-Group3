@@ -12,6 +12,5 @@ provider "aws" {
 }
 
 module "cf-s3" {
-  source      = "modules/cloudfront-s3"
-  bucket_name = "qnt-cf-s3-ci-cd"
+  source      = "./modules/cloudfront-s3"
 }
