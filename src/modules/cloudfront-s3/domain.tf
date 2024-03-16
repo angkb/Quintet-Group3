@@ -1,12 +1,12 @@
 # generate ACM cert for domain :
 resource "aws_acm_certificate" "cert" {
-  domain_name               = var.domain_name
-  subject_alternative_names = ["*.${var.domain_name}"]
-  validation_method         = "DNS"
+  domain_name = local.website_domain
+  # subject_alternative_names = ["*.${var.domain_name}"]
+  validation_method = "DNS"
 
   tags = {
     "Project"   = "Use CloudFront with s3"
-    "ManagedBy" = "Fantastic 5"
+    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
   }
 }
 # validate cert:
@@ -31,7 +31,7 @@ resource "aws_acm_certificate_validation" "certvalidation" {
 }
 # creating A record for domain:
 resource "aws_route53_record" "websiteurl" {
-  name    = var.domain_name
+  name    = local.website_domain
   zone_id = data.aws_route53_zone.hosted_zone.zone_id
   type    = "A"
   alias {
