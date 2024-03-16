@@ -1,6 +1,7 @@
 # List of bugs/errors encountered and its solution/fixes
 
 [On 16 Mar 2024 resolved checkov=CKV_AWS_28]
+
 [On 16 Mar 2024 resolved checkov=CKV2_AWS_16]
 
 ## Error: Checkov analysis check failing upon pull request
