@@ -7,6 +7,13 @@ resource "aws_dynamodb_table" "terraform-lock" {
     name = "LockID"
     type = "S"
   }
+  
+  point_in_time_recovery {
+    enabled = true
+  }
+
+  #checkov:skip=CKV_AWS_119: Managed by Amazon DynamoDB
+
   tags = {
     "Name" = "DynamoDB Terraform State Lock Table"
   }
