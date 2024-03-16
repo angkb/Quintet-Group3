@@ -13,7 +13,7 @@ resource "aws_dynamodb_table" "terraform-lock" {
   }
 
   #checkov:skip=CKV_AWS_119: Managed by Amazon DynamoDB
-  #checkov:skip=CKV2_AWS_16: Created dynamoDBautoscaling.tf to enable autoscaling
+  #checkov:skip=CKV2_AWS_16: Created dynamoDBautoscaling to enable autoscaling
   tags = {
     "Name" = "DynamoDB Terraform State Lock Table"
   }
