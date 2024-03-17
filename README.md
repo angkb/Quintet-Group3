@@ -142,7 +142,7 @@ DevOps lifecycle check in local device
 
 Using Snyk to check for vulnerability in the code
 
-The rational choice to use Snyk lies in its ability to enhance the security posture of software projects by effectively detecting, preventing, and mitigating security vulnerabilities throughout the development lifecycle. It offers a combination of comprehensive coverage, ease of integration, developer-friendly approach, automation, and compliance support, making it a valuable tool for organizations looking to prioritize security in their software development processes. We use Snyk as it integrates seamlessly into existing development workflows and tools, such as GitHub, and IDEs like VS Code. And can incorporate security checks into our workflows without significant disruption.
+>The rational choice to use Snyk lies in its ability to enhance the security posture of software projects by effectively detecting, preventing, and mitigating security vulnerabilities throughout the development lifecycle. It offers a combination of comprehensive coverage, ease of integration, developer->friendly approach, automation, and compliance support, making it a valuable tool for organizations looking to prioritize security in their software >development processes. We use Snyk as it integrates seamlessly into existing development workflows and tools, such as GitHub, and IDEs like VS Code. And >can incorporate security checks into our workflows without significant disruption.
 
 
 ### AWS (Hosting of website)
@@ -158,7 +158,7 @@ Create a bucket to store statefile.tf in S3
 
 ### GitHub Action
 
-GitHub Actions is a powerful tool for automating workflows directly within GitHub repository. Reasons why the team use GitHub Actions are  as follow:
+>GitHub Actions is a powerful tool for automating workflows directly within GitHub repository. Reasons why the team use GitHub Actions are  as follow:
 
 **i**.It can be used to automatically build, test, and deploy code whenever changes are pushed to repository. This helps catch bugs early and ensures that codebase remains in a working state.
 
@@ -228,7 +228,7 @@ Screen capture
 
 ## Section for Pre-requisites 
 
-One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
+>One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
 
 **i**.Create a Lock Table: Create a DynamoDB table dedicated to storing lock information. This table might have attributes like LockId, Resource, Holder, ExpirationTime.
 
