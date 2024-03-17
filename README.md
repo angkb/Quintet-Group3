@@ -213,7 +213,7 @@ Screen capture
 
 ## Section for Pre-requsite 
 
-### One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
+One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
 
 i.Create a Lock Table: Create a DynamoDB table dedicated to storing lock information. This table might have attributes like LockId, Resource, Holder, ExpirationTime.
 
