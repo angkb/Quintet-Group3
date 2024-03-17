@@ -211,7 +211,18 @@ Screen capture
 
 ## Resources 
 
-# Section for Pre-requsite details 
+## Section for Pre-requsite 
+
+### One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
+
+i.Create a Lock Table: Create a DynamoDB table dedicated to storing lock information. This table might have attributes like LockId, Resource, Holder, ExpirationTime.
+
+ii.Acquire Lock: When a member wants to acquire a lock on a resource, it can use a conditional write operation to atomically create a new item in the lock table if the resource is not already locked. The member can include a condition that ensures the resource is not already locked by another member.
+
+iii.Release Lock: When the member no longer needs the lock, it can simply delete the corresponding item from the lock table.
+
+iv.Handle Expirations: To prevent deadlocks in case a member crashes or fails to release the lock, you can include an expiration time with each lock. DynamoDB's TTL (Time-To-Live) feature can automatically delete expired lock items, ensuring that resources are not locked indefinitely.
+
 
 # Test
 
