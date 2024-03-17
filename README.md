@@ -142,6 +142,8 @@ DevOps lifecycle check in local device
 
 Using Snyk to check for vulnerability in the code
 
+The rational choice to use Snyk lies in its ability to enhance the security posture of software projects by effectively detecting, preventing, and mitigating security vulnerabilities throughout the development lifecycle. It offers a combination of comprehensive coverage, ease of integration, developer-friendly approach, automation, and compliance support, making it a valuable tool for organizations looking to prioritize security in their software development processes. We use Snyk as it integrates seamlessly into existing development workflows and tools, such as GitHub, and IDEs like VS Code. And can incorporate security checks into our workflows without significant disruption.
+
 
 ### AWS (Hosting of website)
 Create a static Web Application hosted in S3 
