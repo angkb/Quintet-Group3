@@ -24,7 +24,7 @@ _Our project adopted the following DevSecOps practices:_
 ## _Tools and Technologies_
 _Our project utilized various tools and technologies to support the DevSecOps approach:_ **Please update if missed out**
 
-- **Computing platform & services:** [AWS Cloud, S3 buckets, ACM, ACL, SSM, OAI, Cloudfront, Route53 ... ]
+- **Computing platform & services:** [AWS Cloud, S3 buckets, DynamoDB, ACM, ACL, SSM, OAI, Cloudfront, Route53 ... ]
 - **Version control system (VCS):** [GitHub]
 - **CI/CD pipeline tool:** [GitHub Action] 
 - **Security scanning tools:** [OWASP top 10, Checkov, Snyk]
