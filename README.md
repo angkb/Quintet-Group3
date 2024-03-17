@@ -24,7 +24,7 @@ _Our project adopted the following DevSecOps practices:_
 ## _Tools and Technologies_
 _Our project utilized various tools and technologies to support the DevSecOps approach:_ **Please update if missed out**
 
-- **Computing platform & services:** [AWS Cloud, S3 buckets, ACM, ACL, SSM, OAI, Cloudfront, Route53 ... ]
+- **Computing platform & services:** [AWS Cloud, S3 buckets, DynamoDB, ACM, ACL, SSM, OAI, Cloudfront, Route53 ... ]
 - **Version control system (VCS):** [GitHub]
 - **CI/CD pipeline tool:** [GitHub Action] 
 - **Security scanning tools:** [OWASP top 10, Checkov, Snyk]
@@ -142,6 +142,8 @@ DevOps lifecycle check in local device
 
 Using Snyk to check for vulnerability in the code
 
+>The rational choice to use Snyk lies in its ability to enhance the security posture of software projects by effectively detecting, preventing, and mitigating security vulnerabilities throughout the development lifecycle. It offers a combination of comprehensive coverage, ease of integration, developer->friendly approach, automation, and compliance support, making it a valuable tool for organizations looking to prioritize security in their software >development processes. We use Snyk as it integrates seamlessly into existing development workflows and tools, such as GitHub, and IDEs like VS Code. And >can incorporate security checks into our workflows without significant disruption.
+
 
 ### AWS (Hosting of website)
 Create a static Web Application hosted in S3 
@@ -155,6 +157,19 @@ Create a bucket to store statefile.tf in S3
 
 
 ### GitHub Action
+
+>GitHub Actions is a powerful tool for automating workflows directly within GitHub repository. Reasons why the team use GitHub Actions are  as follow:
+
+**i**.It can be used to automatically build, test, and deploy code whenever changes are pushed to repository. This helps catch bugs early and ensures that codebase remains in a working state.
+
+**ii**.Once code passes the CI tests, GitHub Actions can automate the deployment process to various environments such as staging (herein as development branch) or (herein as main branch) production. This streamlines the release process and reduces the likelihood of human error.
+
+**iii**.GitHub Actions allows defining custom workflows using YAML syntax, giving us full control over the automation process. We can specify the sequence of steps to execute, define dependencies between jobs, and customize the environment in which our code runs.
+
+**iv**.GitHub Actions integrates seamlessly with other services and tools, allowing incorporation into workflow which includes service AWS for cloud infrastructure
+
+
+
 Write CI and CD pipeline script for automated deployment and updates when ever a pull request [*push to main branch] is allowed
 
 The static webpages can be built, tests can be run, and the application can be deployed.
@@ -205,21 +220,29 @@ ____________________________________________________________
 ## Lesson Learnt 
 
 ## Debugging
-Screen capture
+Screen capture 
 
 ## Area for Improvements
 
 ## Resources 
 
+## Section for Pre-requisites 
+
+>One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
+
+**i**.Create a Lock Table: Create a DynamoDB table dedicated to storing lock information. This table might have attributes like LockId, Resource, Holder, ExpirationTime.
+
+**ii**.Acquire Lock: When a member wants to acquire a lock on a resource, it can use a conditional write operation to atomically create a new item in the lock table if the resource is not already locked. The member can include a condition that ensures the resource is not already locked by another member.
+
+**iii**.Release Lock: When the member no longer needs the lock, it can simply delete the corresponding item from the lock table.
+
+**iv**.Handle Expirations: To prevent deadlocks in case a member crashes or fails to release the lock, you can include an expiration time with each lock. DynamoDB's TTL (Time-To-Live) feature can automatically delete expired lock items, ensuring that resources are not locked indefinitely.
+
+
 # Test
-26 Feb 2024 @9.08PM by Raymond
 
 
-07 Mar 2024 @8:08PM by Sagar
-Test Synk actions
 
-07 Mar 2024 @11.49PM by Raymond
-Test dynamoDB state lock
 
 
 
