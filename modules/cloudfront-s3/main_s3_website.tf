@@ -8,6 +8,14 @@ resource "aws_s3_bucket" "bucket" {
   force_destroy = true
 }
 
+# create s3 bucket access logging
+resource "aws_s3_bucket_logging" "access-log-bucket" {
+   bucket = aws_s3_bucket.bucket.id
+   target_bucket = "quintet-log-bucket"
+   target_prefix = "log/"
+ }
+
+
 # create bucket versioning
 resource "aws_s3_bucket_versioning" "versioning_bucket" {
   bucket = aws_s3_bucket.bucket.id
