@@ -205,21 +205,18 @@ ____________________________________________________________
 ## Lesson Learnt 
 
 ## Debugging
-Screen capture
+Screen capture 
 
 ## Area for Improvements
 
 ## Resources 
 
+# Section for Pre-requsite details 
+
 # Test
-26 Feb 2024 @9.08PM by Raymond
 
 
-07 Mar 2024 @8:08PM by Sagar
-Test Synk actions
 
-07 Mar 2024 @11.49PM by Raymond
-Test dynamoDB state lock
 
 
 

@@ -8,6 +8,14 @@ resource "aws_s3_bucket" "bucket" {
   force_destroy = true
 }
 
+# create bucket versioning
+resource "aws_s3_bucket_versioning" "versioning_bucket" {
+  bucket = aws_s3_bucket.bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 # create bucket ACL :
 resource "aws_s3_bucket_ownership_controls" "bucket_acl" {
   bucket = aws_s3_bucket.bucket.id
