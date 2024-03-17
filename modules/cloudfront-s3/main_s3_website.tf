@@ -20,7 +20,7 @@ resource "aws_s3_bucket_versioning" "versioning_bucket" {
 resource "aws_s3_bucket_ownership_controls" "bucket_acl" {
   bucket = aws_s3_bucket.bucket.id
   rule {
-    object_ownership = "BucketOwnerPreferred"
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
