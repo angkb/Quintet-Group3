@@ -16,6 +16,7 @@
 3.[On 17 Mar 2024 checkov s3 bucket versioning issue and resouce block added](/screenshots/17032024-checkov-s3_bucket_versioning_issue.png)
 4.[On 17 Mar 2024 checkov ensure access control lists for S3 buckets are disabled](/screenshots/17032024-checkov-s3_bucket_ACL_issue.png)
 5.[On 18 Mar 2024 checkov ensure s3 bucket access logging enable](/screenshots/18032024-checkov-s3_bucket_ACL_issue.png)
+
 ## Fix: Specify a "Suppressing individual checks" within the Terraform configurations for known issue
 
 1.[On 16 Mar 2024 suppresed checkov=CKV_AWS_119]
