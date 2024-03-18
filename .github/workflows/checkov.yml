@@ -8,10 +8,13 @@ on:
 jobs:
   Checkov:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: { dir: ['modules', 'prd', 'dynamoDB'] }
 
     defaults:
       run:
-        working-directory: modules
+        # working-directory: modules
+        working-directory: ${{ matrix.dir }}
         
     steps:
     - name: Checkout
