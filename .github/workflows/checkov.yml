@@ -8,19 +8,21 @@ on:
 jobs:
   Checkov:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: { dir: ['modules', 'prd', 'dynamoDB'] }
+    # strategy:
+    #   matrix: { dir: ["modules", "prd", "dynamoDB"] }
 
-    defaults:
-      run:
+    # defaults:
+    #   run:
         # working-directory: modules
-        working-directory: ${{ matrix.dir }}
+        # working-directory: ${{ matrix.dir }}
         
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Checkov
+    - name: Checkov analysis
+      id: checkov
       uses: bridgecrewio/checkov-action@master
       with:
+        directory: .
         framework: terraform
