@@ -177,16 +177,16 @@ The static webpages can be built, tests can be run, and the application can be d
 Using Snyk to check for vulnerability
 
 ____________________________________________________________
+
 ## Architecture Diagram
 
---Insert Diagram--
-
+![Architecture diagram](/screenshots/Insert Archi Diagram.png)
 
 ## Dependencies
+
 - AWS S3 bucket
 - Snyk
 - Terraform
-
 
 ## Application steps (DevOps)
 
@@ -194,39 +194,45 @@ ____________________________________________________________
 
 ### S3 Bucket (HTML)
 
-
 ## Branching Strategies
 
+Main (Production) > Development > Features
+
+- Main branch
+
+Production-ready branch for deployment. Branch protection enabled.
+
+- Development branch
+
+Code-ready branch with implemented features added via different phases of the project. Branch protection enabled.
+
+- Features branch
+
+Accessible branch to all team members continuously updated with features and upgrades throughout the development stages for debugging for implementation into the development branch.
 
 ## Security Steps (Sec)
 
 ### Github branch merge
 
-
 ### Security in AWS
-
 
 ### Secrets in Github
 
-
 ### S3 Bucket (Statefile)
-
 
 ### Vulnerability Scan
 
-
-
-
-## Lesson Learnt 
+## Lesson Learnt
 
 ## Debugging
-Screen capture 
+
+Refer to the [HISTORY.md](/screenshots/HISTORY.md) for a list of notable bugs and errors encountered.
 
 ## Area for Improvements
 
-## Resources 
+## Resources
 
-## Section for Pre-requisites 
+## Section for Pre-requisites
 
 >One time setup effort to create DynamoDB table (state-lock) + s3 bucket for an effective approach in distributed systems to ensure consistency and prevent concurrent modifications to shared resources.By leveraging DynamoDB for state locking, we build a highly scalable, reliable, and performant locking mechanism that ensures data consistency and prevents conflicts in distributed systems.
 
@@ -237,7 +243,6 @@ Screen capture
 **iii**.Release Lock: When the member no longer needs the lock, it can simply delete the corresponding item from the lock table.
 
 **iv**.Handle Expirations: To prevent deadlocks in case a member crashes or fails to release the lock, you can include an expiration time with each lock. DynamoDB's TTL (Time-To-Live) feature can automatically delete expired lock items, ensuring that resources are not locked indefinitely.
-
 
 # Test
 

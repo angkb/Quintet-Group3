@@ -12,5 +12,5 @@ provider "aws" {
 }
 
 module "cf-s3" {
-  source      = "./modules/cloudfront-s3"
+  source      = "../modules/cloudfront-s3"
 }
