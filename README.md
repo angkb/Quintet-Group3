@@ -196,6 +196,8 @@ ____________________________________________________________
 
 ## Branching Strategies
 
+![Gitflow diagram overview](./screenshots/branching-strategy.png)
+
 Main (Production) > Development > Features
 
 - Main branch
