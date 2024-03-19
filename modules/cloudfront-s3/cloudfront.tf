@@ -8,6 +8,14 @@ resource "aws_cloudfront_distribution" "cf_dist" {
   enabled             = true
   aliases             = [local.website_domain]
   default_root_object = "static-website/index.html"
+
+  # logging cloudfront distribution:
+  logging_config {
+    include_cookies = false
+    bucket          = "quintet-log-bucket"
+    prefix          = "log"
+  }
+
   origin {
     domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name
     origin_id   = aws_s3_bucket.bucket.id
@@ -44,4 +52,6 @@ resource "aws_cloudfront_distribution" "cf_dist" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2018"
   }
+
+
 }
