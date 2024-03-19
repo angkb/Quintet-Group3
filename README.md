@@ -196,6 +196,7 @@ ____________________________________________________________
 
 ## Branching Strategies
 
+![Gitflow diagram overview](./screenshots/branching-strategy.png)
 Main (Production) > Development > Features
 
 - Main branch
@@ -226,7 +227,7 @@ Accessible branch to all team members continuously updated with features and upg
 
 ## Debugging
 
-Refer to the [HISTORY.md](/screenshots/HISTORY.md) for a list of notable bugs and errors encountered.
+Refer to the [HISTORY.md](/HISTORY.md) for a list of notable bugs and errors encountered.
 
 ## Area for Improvements
 
