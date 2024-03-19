@@ -22,6 +22,9 @@ All notable bugs/errors to this project will be documented in this file.
 
 6. [On 19 Mar 2024 checkov ensure s3 bucket lifecycle configuration block added](/screenshots/19032024-checkov-s3_bucket_lifecycle-configuration_issue.png)
 
+7. [On 19 Mar 2024 checkov ensure abort_incomplete_multipart_up rule added](/screenshots/19032024-checkov-s3_bucket_lifecycle-configuration_set-abort_issue.png)
+
+
 n. Edit or remove as necessary
 
 ## Bug or Error: Add notable bug/error here
