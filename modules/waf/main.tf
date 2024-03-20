@@ -1,5 +1,4 @@
 resource "aws_wafv2_web_acl" "cloudfront" {
-  #checkov:skip=CKV2_AWS_31:Ensure WAF2 has a Logging Configuration
   name  = "quintet-cloudfront-waf"
   scope = "CLOUDFRONT"
 
