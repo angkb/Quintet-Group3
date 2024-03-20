@@ -13,6 +13,23 @@ resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
+
+origin_group {
+    origin_id = "groupS3"
+
+    failover_criteria {
+      status_codes = [403, 404, 500, 502]
+    }
+
+    member {
+      origin_id = "primaryS3"
+    }
+
+    member {
+      origin_id = "failoverS3"
+    }
+  }
+
   origin {
     domain_name              = aws_s3_bucket.static_web.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
