@@ -5,6 +5,6 @@ terraform {
     region = "ap-southeast-1"
 
     # State Locking
-    dynamodb_table = "quintet-state"  
+    dynamodb_table = "quintet-state"
   }
 }
