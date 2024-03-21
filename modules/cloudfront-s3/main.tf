@@ -28,7 +28,8 @@ resource "aws_kms_key" "mykey" {
     ]
   }
 POLICY
-  deletion_window_in_days = 10
+  enable_key_rotation = true
+  deletion_window_in_days = 20
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
