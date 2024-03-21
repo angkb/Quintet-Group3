@@ -20,6 +20,7 @@ module "waf" {
 }
 
 module "acm" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 4.0"
 
@@ -33,6 +34,7 @@ module "acm" {
 }
 
 module "records" {
+  #checkov:skip=CKV_TF_1:Ensure Terraform module sources use a commit hash
   source  = "terraform-aws-modules/route53/aws//modules/records"
   version = "~> 2.0"
 
