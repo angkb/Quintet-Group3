@@ -7,6 +7,17 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
+# encrypt bucket using SSE-S3  -checkov-CKV_AWS_145
+resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
+  bucket = aws_s3_bucket.static_web.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+
 # create s3 bucket access logging -checkov-CKV_AWS_18
 resource "aws_s3_bucket_logging" "access-log-bucket" {
   bucket        = aws_s3_bucket.static_web.id
