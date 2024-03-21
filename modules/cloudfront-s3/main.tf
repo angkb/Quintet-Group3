@@ -22,16 +22,17 @@ resource "aws_s3_bucket_versioning" "versioning_bucket" {
   }
 }
 
-# create bucket versioning -checkov-CKV_AWS_61
+# create bucket lifecycle configuratio -checkov-CKV_AWS_61
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   bucket = aws_s3_bucket.static_web.id
 
   rule {
     id = "log"
-    abort_incomplete_multipart_upload {
+
+    abort_incomplete_multipart_upload { //create bucket abort_incomplete_multipart_upload -checkov-CKV_AWS_300
       days_after_initiation = 3
     }
-    
+
     expiration {
       days = 90
     }
