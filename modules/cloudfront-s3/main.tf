@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "static_web" {
 
 #checkov:skip=CKV2_AWS_62:This project does not need notification service
-#checkov:skip=CKV_AWS_144: Future add on for cross-region replication
   bucket = "quintet-cf-bkt"
   tags = {
     "Project"   = "Use CloudFront with s3"
@@ -10,11 +9,28 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
-# create public access block CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
- resource "aws_s3_bucket_public_access_block" "access_good_1" {
-    bucket = aws_s3_bucket.bucket_good_1.id
-    block_public_acls   = true
-    block_public_policy = true
+resource "aws_s3_bucket_ownership_controls" "example" {
+  bucket = aws_s3_bucket.static_web.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+#added bucket acl
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.example]
+
+  bucket = aws_s3_bucket.static_web.id
+  acl    = "private"
+}
+
+# create public access block for CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
+ resource "aws_s3_bucket_public_access_block" "static_web" {
+    bucket = aws_s3_bucket.static_web.id
+    block_public_acls       = true
+    block_public_policy     = true
+    ignore_public_acls      = true
+    restrict_public_buckets = true
 }
 
 # encrypt bucket using SSE-S3  -checkov-CKV_AWS_145
@@ -52,22 +68,76 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
   }
 }
 
+resource "aws_s3_bucket" "log_bucket" {
+  bucket = "quintet-log-bucket1"
+}
 
 # create s3 bucket access logging -checkov-CKV_AWS_18
 resource "aws_s3_bucket_logging" "access-log-bucket" {
   bucket        = aws_s3_bucket.static_web.id
-  target_bucket = "quintet-log-bucket"
+  target_bucket = aws_s3_bucket.log_bucket.id
   target_prefix = "log/"
 }
 
 # create bucket versioning -checkov-CKV_AWS_21
-resource "aws_s3_bucket_versioning" "versioning_bucket" {
-  bucket = aws_s3_bucket.static_web.id
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.versioning_bucket.id
   versioning_configuration {
     status = "Enabled"
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
+  # Must have bucket versioning enabled first
+  depends_on = [aws_s3_bucket_versioning.versioning]
+
+  bucket = aws_s3_bucket.versioning_bucket.id
+
+  rule {
+    id = "config"
+
+    filter {
+      prefix = "config/"
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
+    }
+
+    noncurrent_version_transition {
+      noncurrent_days = 30
+      storage_class   = "STANDARD_IA"
+    }
+
+    noncurrent_version_transition {
+      noncurrent_days = 60
+      storage_class   = "GLACIER"
+    }
+
+    status = "Enabled"
+  }
+}
+
+
+
+resource "aws_s3_bucket" "versioning_bucket" {
+  bucket = "quintet-versioning-bucket"
+}
+
+resource "aws_s3_bucket_ownership_controls" "versioning" {
+  bucket = aws_s3_bucket.versioning_bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+#added bucket acl
+resource "aws_s3_bucket_acl" "versioning_bucket_acl" {
+  depends_on = [aws_s3_bucket_ownership_controls.versioning]
+
+  bucket = aws_s3_bucket.versioning_bucket.id
+  acl    = "private"
+}
 # create bucket lifecycle configuratio -checkov-CKV_AWS_61
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   bucket = aws_s3_bucket.static_web.id
@@ -115,7 +185,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
     }
 
     expiration {
-      date = "2023-12-31T00:00:00Z"
+      days = 7
     }
 
     status = "Enabled"
