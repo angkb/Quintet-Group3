@@ -147,6 +147,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   bucket = aws_s3_bucket.static_web.id
 
   rule {
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
     id = "log"
 
     expiration {
