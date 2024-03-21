@@ -7,6 +7,14 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
+# create bucket versioning -checkov-CKV_AWS_21
+resource "aws_s3_bucket_versioning" "versioning_bucket" {
+  bucket = aws_s3_bucket.static_web.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.static_web.id
   policy = data.aws_iam_policy_document.default.json
