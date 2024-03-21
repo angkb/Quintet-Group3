@@ -29,10 +29,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   rule {
     id = "log"
 
-    abort_incomplete_multipart_upload { //create bucket abort_incomplete_multipart_upload -checkov-CKV_AWS_300
-      days_after_initiation = 3
-    }
-
     expiration {
       days = 90
     }
@@ -74,6 +70,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 
     status = "Enabled"
   }
+
+//create bucket abort_incomplete_multipart_upload -checkov-CKV_AWS_300
+  abort_incomplete_multipart_upload { 
+      days_after_initiation = 3
+    }
 }
 
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
