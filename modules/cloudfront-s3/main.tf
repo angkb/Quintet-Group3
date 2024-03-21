@@ -28,9 +28,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 
   rule {
     id = "log"
-  abort_incomplete_multipart_upload {
-    days_after_initiation = 3
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 3
     }
+    
     expiration {
       days = 90
     }
