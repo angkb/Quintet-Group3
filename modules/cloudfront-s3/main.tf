@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "static_web" {
 
 #checkov:skip=CKV2_AWS_62:This project does not need notification service
-
+#checkov:skip=CKV_AWS_144: Future add on for cross-region replication
   bucket = "quintet-cf-bkt"
   tags = {
     "Project"   = "Use CloudFront with s3"
