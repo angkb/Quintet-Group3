@@ -10,6 +10,13 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
+# create public access block CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
+ resource "aws_s3_bucket_public_access_block" "access_good_1" {
+    bucket = aws_s3_bucket.bucket_good_1.id
+    block_public_acls   = true
+    block_public_policy = true
+}
+
 # encrypt bucket using SSE-S3  -checkov-CKV_AWS_145
 
 resource "aws_kms_key" "mykey" {
