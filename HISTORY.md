@@ -28,6 +28,8 @@ All notable bugs/errors to this project will be documented in this file.
 
 9. [On 21 Mar 2024 checkov ensure s3 bucket encrpted with KMS block added](./screenshots/21032024-checkov-s3_bucket_encrypted_with_KMS_issue.png)
 
+10.[On 21 Mar 2024 checkov ensure KMS key policy added](./screenshots/21032024-checkov-define_KMS_key_policy_issue.png)
+
 n. Edit or remove as necessary
 
 ## Bug or Error: Add notable bug/error here

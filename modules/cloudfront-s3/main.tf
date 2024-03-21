@@ -11,6 +11,23 @@ resource "aws_s3_bucket" "static_web" {
 
 resource "aws_kms_key" "mykey" {
   description             = "This key is used to encrypt bucket objects"
+  policy      = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+      {
+        "Sid": "DefaultAllow",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::255945442255:root"
+        },
+        "Action": "kms:*",
+        "Resource": "*"
+      }
+    ]
+  }
+POLICY
   deletion_window_in_days = 10
 }
 
