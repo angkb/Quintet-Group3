@@ -9,15 +9,65 @@ resource "aws_s3_bucket" "static_web" {
 
 # create s3 bucket access logging -checkov-CKV_AWS_18
 resource "aws_s3_bucket_logging" "access-log-bucket" {
-   bucket = aws_s3_bucket.static_web.id
-   target_bucket = "quintet-log-bucket"
-   target_prefix = "log/"
- }
+  bucket        = aws_s3_bucket.static_web.id
+  target_bucket = "quintet-log-bucket"
+  target_prefix = "log/"
+}
 
 # create bucket versioning -checkov-CKV_AWS_21
 resource "aws_s3_bucket_versioning" "versioning_bucket" {
   bucket = aws_s3_bucket.static_web.id
   versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# create bucket versioning -checkov-CKV_AWS_61
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+  bucket = aws_s3_bucket.static_web.id
+
+  rule {
+    id = "log"
+
+    expiration {
+      days = 90
+    }
+
+    filter {
+      and {
+        prefix = "log/"
+
+        tags = {
+          rule      = "log"
+          autoclean = "true"
+        }
+      }
+    }
+
+    status = "Enabled"
+
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+
+    transition {
+      days          = 60
+      storage_class = "GLACIER"
+    }
+  }
+
+  rule {
+    id = "tmp"
+
+    filter {
+      prefix = "tmp/"
+    }
+
+    expiration {
+      date = "2023-12-31T00:00:00Z"
+    }
+
     status = "Enabled"
   }
 }
@@ -29,7 +79,7 @@ resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
 
-origin_group {
+  origin_group {
     origin_id = "groupS3"
 
     failover_criteria {
