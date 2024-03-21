@@ -18,7 +18,7 @@ All notable bugs/errors to this project will be documented in this file.
 
 4. [On 17 Mar 2024 checkov ensure access control lists for S3 buckets are disabled](./screenshots/17032024-checkov-s3_bucket_ACL_issue.png)
 
-5. [On 18 Mar 2024 checkov ensure s3 bucket access logging enable](./screenshots/18032024-checkov-s3_bucket_ACL_issue.png)
+5. [On 21 Mar 2024 checkov ensure s3 bucket access logging enable](./screenshots/21032024-checkov-s3_bucket_Access-logging_issue.png)
 
 6. [On 19 Mar 2024 checkov ensure s3 bucket lifecycle configuration block added](./screenshots/19032024-checkov-s3_bucket_lifecycle-configuration_issue.png)
 

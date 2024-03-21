@@ -7,6 +7,13 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
+# create s3 bucket access logging -checkov-CKV_AWS_18
+resource "aws_s3_bucket_logging" "access-log-bucket" {
+   bucket = aws_s3_bucket.static_web.id
+   target_bucket = "quintet-log-bucket"
+   target_prefix = "log/"
+ }
+
 # create bucket versioning -checkov-CKV_AWS_21
 resource "aws_s3_bucket_versioning" "versioning_bucket" {
   bucket = aws_s3_bucket.static_web.id
