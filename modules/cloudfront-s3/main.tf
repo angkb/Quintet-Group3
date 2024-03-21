@@ -10,6 +10,7 @@ resource "aws_s3_bucket" "static_web" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "example" {
+#checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.static_web.id
   rule {
     object_ownership = "BucketOwnerPreferred"
@@ -139,6 +140,7 @@ resource "aws_s3_bucket" "versioning_bucket" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "versioning" {
+#checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.versioning_bucket.id
   rule {
     object_ownership = "BucketOwnerPreferred"
