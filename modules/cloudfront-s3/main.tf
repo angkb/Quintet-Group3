@@ -117,12 +117,14 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     target_origin_id       = "origin-${aws_s3_bucket.static_web.id}"
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   viewer_certificate {
     acm_certificate_arn = var.acm_certificate_arn
     ssl_support_method  = "sni-only"
+    cloudfront_default_certificate = false
+    minimum_protocol_version = "TLSv1.2_2018"
   }
 
   restrictions {
