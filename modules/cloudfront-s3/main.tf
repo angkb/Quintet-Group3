@@ -139,6 +139,13 @@ resource "aws_s3_bucket" "versioning_bucket" {
   bucket = "quintet-versioning-bucket"
 }
 
+resource "aws_s3_bucket_public_access_block" "access_good" {
+  bucket = aws_s3_bucket.versioning_bucket.id
+
+  block_public_acls = true
+  block_public_policy = true
+}
+
 resource "aws_s3_bucket_ownership_controls" "versioning" {
 #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.versioning_bucket.id
