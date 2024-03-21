@@ -75,7 +75,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
     status = "Enabled"
   }
 
-
+}
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.static_web.id
   policy = data.aws_iam_policy_document.default.json
