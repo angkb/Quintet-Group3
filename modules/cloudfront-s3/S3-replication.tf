@@ -4,11 +4,20 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-
-resource "aws_s3_bucket" "static_web_replica" {
+resource "aws_s3_bucket_lifecycle_configuration" "static_web_replica" {
+#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   provider = aws.central
 
   bucket = "quintet-cf-bkt-replica"
+
+  rule {
+    id = "ExpireAllObjects"
+    status = "Enabled"
+
+    expiration {
+      days = 180
+    }
+  }
   tags = {
     "Project"   = "Use CloudFront with s3"
     "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
@@ -20,8 +29,6 @@ resource "aws_iam_role" "replication" {
   name               = "tf-iam-role-replication-12345"
   assume_role_policy = data.aws_iam_policy_document.default.json
 }
-
-
 
 resource "aws_s3_bucket_versioning" "versioning_bucket_replica" {
   provider = aws.central

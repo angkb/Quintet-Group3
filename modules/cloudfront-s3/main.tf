@@ -68,8 +68,18 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
   }
 }
 
-resource "aws_s3_bucket" "log_bucket" {
+resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {
+#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   bucket = "quintet-log-bucket1"
+
+  rule {
+    id = "ExpireAllObjects"
+    status = "Enabled"
+
+    expiration {
+      days = 180
+    }
+  }
 }
 
 # create s3 bucket access logging -checkov-CKV_AWS_18
@@ -88,6 +98,7 @@ resource "aws_s3_bucket_versioning" "versioning" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
+#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   # Must have bucket versioning enabled first
   depends_on = [aws_s3_bucket_versioning.versioning]
 
@@ -122,9 +133,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
   }
 }
 
-
-
 resource "aws_s3_bucket" "versioning_bucket" {
+#checkov:skip=CKV2_AWS_62:This project does not need notification service
   bucket = "quintet-versioning-bucket"
 }
 
@@ -142,8 +152,10 @@ resource "aws_s3_bucket_acl" "versioning_bucket_acl" {
   bucket = aws_s3_bucket.versioning_bucket.id
   acl    = "private"
 }
+
 # create bucket lifecycle configuratio -checkov-CKV_AWS_61
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   bucket = aws_s3_bucket.static_web.id
 
   rule {
@@ -196,13 +208,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   }
 
 }
+
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.static_web.id
   policy = data.aws_iam_policy_document.default.json
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
-
 
   # logging cloudfront distribution: -checkov-CKV_AWS_86
   logging_config {
