@@ -119,6 +119,14 @@ resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
 
+
+  # logging cloudfront distribution: -checkov-CKV_AWS_86
+  logging_config {
+    include_cookies = false
+    bucket          = "quintet-log-bucket"
+    prefix          = "log"
+  }
+
   origin_group {
     origin_id = "groupS3"
 

@@ -24,7 +24,7 @@ All notable bugs/errors to this project will be documented in this file.
 
 7. [On 21 Mar 2024 checkov ensure abort_incomplete_multipart_up rule added](./screenshots/21032024-checkov-s3_bucket_lifecycle-configuration_set-abort_issue.png)
 
-8. [On 19 Mar 2024 checkov ensure logging_config block added](/screenshots/19032024-checkov-cf-distribution-logging_issue.png)
+8. [On 21 Mar 2024 checkov ensure cloudfront distribution with access logging added](/screenshots/21032024-checkov-cf-distribution-logging_issue.png)
 
 9. [On 21 Mar 2024 checkov ensure s3 bucket encrpted with KMS block added](./screenshots/21032024-checkov-s3_bucket_encrypted_with_KMS_issue.png)
 
