@@ -8,7 +8,7 @@ All notable bugs/errors to this project will be documented in this file.
 
 ![Checkov analysis on Terraform configurations when creating a pull request to merge to 1 branch above](./screenshots/checkov-screenshot.png)
 
-## Fix: Specify a "Suppressing individual checks" within the Terraform configurations for known issues
+## Solution: Resolve the error with known fix, or specify a "Suppressing individual checks" comment within the Terraform configurations for known issues
 
 1. [On 16 Mar 2024 checkov two issues and resolved](./screenshots/16032024-checkov-2_issues.png)
 
