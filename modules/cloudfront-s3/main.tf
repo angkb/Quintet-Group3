@@ -9,6 +9,10 @@ resource "aws_s3_bucket" "static_web" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket" "log_bucket" {
+  bucket = "quintet-cf-bkt-log-01"
+}
+
 resource "aws_s3_bucket_ownership_controls" "example" {
 #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.static_web.id
@@ -69,9 +73,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
-  bucket = "quintet-log-bucket1"
+  bucket = aws_s3_bucket.static_web.id
 
   rule {
     id = "ExpireAllObjects"
@@ -163,60 +167,6 @@ resource "aws_s3_bucket_acl" "versioning_bucket_acl" {
 }
 
 # create bucket lifecycle configuratio -checkov-CKV_AWS_61
-resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
-#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
-  bucket = aws_s3_bucket.static_web.id
-
-  rule {
-    id = "log"
-
-    expiration {
-      days = 90
-    }
-
-    abort_incomplete_multipart_upload {
-      days_after_initiation = 3
-    }      
-
-    filter {
-      and {
-        prefix = "log/"
-
-        tags = {
-          rule      = "log"
-          autoclean = "true"
-        }
-      }
-    }
-
-    status = "Enabled"
-
-    transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
-    }
-
-    transition {
-      days          = 60
-      storage_class = "GLACIER"
-    }
-  }
-
-  rule {
-    id = "tmp"
-
-    filter {
-      prefix = "tmp/"
-    }
-
-    expiration {
-      days = 7
-    }
-
-    status = "Enabled"
-  }
-
-}
 
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.static_web.id
@@ -228,8 +178,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   # logging cloudfront distribution: -checkov-CKV_AWS_86
   logging_config {
     include_cookies = false
-    bucket          = "quintet-log-bucket"
-    prefix          = "log"
+    bucket          = "quintet-cf-bkt-log123"
+    # prefix          = "log"
   }
 
   origin_group {

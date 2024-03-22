@@ -4,11 +4,23 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "static_web_replica" {
+resource "aws_s3_bucket" "static_web_replica" {
+  provider = aws.central
+#checkov:skip=CKV2_AWS_62:This project does not need notification service
+  bucket = "quintet-cf-bkt-replica"
+  tags = {
+    "Project"   = "Use CloudFront with s3"
+    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
+  }
+  force_destroy = true
+}
+
+
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config-replica" {
 #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   provider = aws.central
 
-  bucket = "quintet-cf-bkt-replica"
+  bucket = aws_s3_bucket.static_web_replica.id
 
   rule {
     id = "ExpireAllObjects"
