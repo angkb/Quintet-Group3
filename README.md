@@ -221,10 +221,15 @@ ____________________________________________________________
 Main (Production) > Development > Features
 
 - Main branch
+  ![image](https://github.com/angkb/Quintet-Group3/assets/83577245/3ae4f0d0-614c-4675-a210-7c40744b7a07)
+
 
 Production-ready branch for deployment. Branch protection enabled.
 
 - Development branch
+
+  ![image](https://github.com/angkb/Quintet-Group3/assets/83577245/9d3bf2da-904b-475b-ba02-b3d404c3210c)
+
 
 Code-ready branch with implemented features added via different phases of the project. Branch protection enabled.
 
