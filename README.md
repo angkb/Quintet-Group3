@@ -42,14 +42,17 @@ _Our project utilized various tools and technologies to support the DevSecOps ap
 Main (Production) > Development > Features
 
 - Main branch
+![image](https://github.com/angkb/Quintet-Group3/assets/83577245/3ae4f0d0-614c-4675-a210-7c40744b7a07)
 
 Production-ready branch for deployment. Branch protection enabled.
 
-- <span style="color: green">Development branch</span>
+- <span style="color: lightblue">Development branch</span>
+ ![image](https://github.com/angkb/Quintet-Group3/assets/83577245/9d3bf2da-904b-475b-ba02-b3d404c3210c)
+
 
 Code-ready branch with implemented features added via different phases of the project. Branch protection enabled.
 
-- Features branch
+-  <span style="color: green">Features branch</span>
 
 Accessible branch to all team members continuously updated with features and upgrades throughout the development stages for debugging for implementation into the development branch.
 
