@@ -13,16 +13,17 @@ resource "aws_s3_bucket_lifecycle_configuration" "static_web_replica" {
   rule {
     id = "ExpireAllObjects"
     status = "Enabled"
+    filter{
+      tag {
+      key   = "Use CloudFront with s3"
+      value = "Quintet-NTU-Capstone-CE4-Grp3"
+    }
+  }
 
     expiration {
       days = 180
     }
   }
-  tags = {
-    "Project"   = "Use CloudFront with s3"
-    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
-  }
-  force_destroy = true
 }
 
 resource "aws_iam_role" "replication" {
