@@ -32,7 +32,6 @@ All notable bugs/errors to this project will be documented in this file.
 
 11. [On 21 Mar 2024 checkov ensure KMS key rotation added](./screenshots/21032024-checkov-rotation_KMS_key_policy_issue.png)
 
-n. Edit or remove as necessary
 
 ## Bug or Error: Add notable bug/error here
 
