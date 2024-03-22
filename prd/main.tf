@@ -1,5 +1,5 @@
 locals {
-  domain_prefix = "quintet-cloudfront"
+  domain_prefix = "dynamics"
   zone_name     = "sctp-sandbox.com"
 }
 

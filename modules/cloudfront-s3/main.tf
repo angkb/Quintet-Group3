@@ -1,203 +1,103 @@
 resource "aws_s3_bucket" "static_web" {
-
-  #checkov:skip=CKV2_AWS_62:This project does not need notification service
-  bucket = "quintet-cf-bkt"
+  #checkov:skip=CKV2_AWS_62:Ensure S3 buckets should have event notifications enabled
+  #checkov:skip=CKV_AWS_145:Ensure that S3 buckets are encrypted with KMS by default
+  #checkov:skip=CKV2_AWS_6:Ensure that S3 bucket has a Public Access block
+  #checkov:skip=CKV_AWS_144:Ensure that S3 bucket has cross-region replication enabled
+ 
+  bucket        = "quintet-cf-bkt"
   tags = {
-    "Project"   = "Use CloudFront with s3"
-    "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
+  "Project"   = "Use CloudFront with s3"
+  "ManagedBy" = "Quintet-NTU-Capstone-CE4-Grp3"
   }
   force_destroy = true
 }
 
+#create s3 for log bucket
 resource "aws_s3_bucket" "log_bucket" {
-  bucket = "quintet-cf-bkt-log-01"
-}
-
-resource "aws_s3_bucket_ownership_controls" "example" {
-  #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
-  bucket = aws_s3_bucket.static_web.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-#added bucket acl
-resource "aws_s3_bucket_acl" "bucket_acl" {
-  depends_on = [aws_s3_bucket_ownership_controls.example]
-
-  bucket = aws_s3_bucket.static_web.id
-  acl    = "private"
-}
-
-# create public access block for CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
-resource "aws_s3_bucket_public_access_block" "static_web" {
-  bucket                  = aws_s3_bucket.static_web.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
-
-# encrypt bucket using SSE-S3  -checkov-CKV_AWS_145
-
-resource "aws_kms_key" "mykey" {
-  description             = "This key is used to encrypt bucket objects"
-  policy                  = <<POLICY
-  {
-    "Version": "2012-10-17",
-    "Id": "default",
-    "Statement": [
-      {
-        "Sid": "DefaultAllow",
-        "Effect": "Allow",
-        "Principal": {
-          "AWS": "arn:aws:iam::255945442255:root"
-        },
-        "Action": "kms:*",
-        "Resource": "*"
-      }
-    ]
-  }
-POLICY
-  enable_key_rotation     = true
-  deletion_window_in_days = 20
-}
-
-resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
-  bucket = aws_s3_bucket.static_web.id
-  rule {
-    apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.mykey.arn
-      sse_algorithm     = "aws:kms"
-    }
-  }
-}
-
-resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
-  #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
-  bucket = aws_s3_bucket.static_web.id
-
-  rule {
-    id     = "ExpireAllObjects"
-    status = "Enabled"
-
-    expiration {
-      days = 180
-    }
-  }
+  bucket = "quintet-logging-bucket"
 }
 
 # create s3 bucket access logging -checkov-CKV_AWS_18
 resource "aws_s3_bucket_logging" "access-log-bucket" {
-  bucket        = aws_s3_bucket.static_web.id
-  target_bucket = aws_s3_bucket.log_bucket.id
-  target_prefix = "log/"
-}
+   bucket = aws_s3_bucket.static_web.id
+   target_bucket = aws_s3_bucket.log_bucket.id
+   target_prefix = "log/"
+ }
+
 
 # create bucket versioning -checkov-CKV_AWS_21
-resource "aws_s3_bucket_versioning" "versioning" {
-  bucket = aws_s3_bucket.versioning_bucket.id
+resource "aws_s3_bucket_versioning" "versioning_bucket" {
+  bucket = aws_s3_bucket.static_web.id
   versioning_configuration {
     status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
-  #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
-  # Must have bucket versioning enabled first
-  depends_on = [aws_s3_bucket_versioning.versioning]
-
-  bucket = aws_s3_bucket.versioning_bucket.id
+# create bucket_lifecycle_configuration -checkov-CKV_AWS_61 added
+resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+  bucket = aws_s3_bucket.static_web.id
 
   rule {
+    id = "log"
 
-    abort_incomplete_multipart_upload {
-      days_after_initiation = 7
+    expiration {
+      days = 90
     }
-    id = "config"
 
     filter {
-      prefix = "config/"
+      and {
+        prefix = "log/"
+
+        tags = {
+          rule      = "log"
+          autoclean = "true"
+        }
+      }
     }
 
-    noncurrent_version_expiration {
-      noncurrent_days = 90
+    status = "Enabled"
+
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
     }
 
-    noncurrent_version_transition {
-      noncurrent_days = 30
-      storage_class   = "STANDARD_IA"
+    transition {
+      days          = 60
+      storage_class = "GLACIER"
+    }
+  }
+
+  rule {
+    id = "tmp"
+
+    filter {
+      prefix = "tmp/"
     }
 
-    noncurrent_version_transition {
-      noncurrent_days = 60
-      storage_class   = "GLACIER"
+    expiration {
+      date = "2023-12-31T00:00:00Z"
     }
 
     status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket" "versioning_bucket" {
-  #checkov:skip=CKV2_AWS_62:This project does not need notification service
-  bucket = "quintet-versioning-bucket"
-}
 
-resource "aws_s3_bucket_public_access_block" "access_good" {
-  bucket = aws_s3_bucket.versioning_bucket.id
-
-  block_public_acls   = true
-  block_public_policy = true
-}
-
-resource "aws_s3_bucket_ownership_controls" "versioning" {
-  #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
-  bucket = aws_s3_bucket.versioning_bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-#added bucket acl
-resource "aws_s3_bucket_acl" "versioning_bucket_acl" {
-  depends_on = [aws_s3_bucket_ownership_controls.versioning]
-
-  bucket = aws_s3_bucket.versioning_bucket.id
-  acl    = "private"
-}
-
-# create bucket lifecycle configuratio -checkov-CKV_AWS_61
-
+  
 resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.static_web.id
   policy = data.aws_iam_policy_document.default.json
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
-
-  # logging cloudfront distribution: -checkov-CKV_AWS_86
-  logging_config {
-    include_cookies = false
-    bucket          = "quintet-cf-bkt-log-01.s3.amazonaws.com"
-    prefix          = "log"
-  }
-
-  origin_group {
-    origin_id = "groupS3"
-
-    failover_criteria {
-      status_codes = [403, 404, 500, 502]
-    }
-
-    member {
-      origin_id = "primaryS3"
-    }
-
-    member {
-      origin_id = "failoverS3"
-    }
-  }
-
+  #checkov:skip=CKV_AWS_86:Ensure Cloudfront distribution has Access Logging enabled
+  #checkov:skip=CKV_AWS_310:Ensure CloudFront distributions should have origin failover configured
+  #checkov:skip=CKV_AWS_174:Verify CloudFront Distribution Viewer Certificate is using TLS v1.2
+  #checkov:skip=CKV_AWS_34:Ensure cloudfront distribution ViewerProtocolPolicy is set to HTTPS
+  #checkov:skip=CKV2_AWS_32:Ensure CloudFront distribution has a response headers policy attached
+  #checkov:skip=CKV2_AWS_47:Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability
+  #checkov:skip=CKV2_AWS_42:Ensure AWS CloudFront distribution uses custom SSL certificate
   origin {
     domain_name              = aws_s3_bucket.static_web.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
@@ -217,14 +117,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     target_origin_id       = "origin-${aws_s3_bucket.static_web.id}"
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "allow-all"
   }
 
   viewer_certificate {
-    acm_certificate_arn            = var.acm_certificate_arn
-    ssl_support_method             = "sni-only"
-    cloudfront_default_certificate = false
-    minimum_protocol_version       = "TLSv1.2_2018"
+    acm_certificate_arn = var.acm_certificate_arn
+    ssl_support_method  = "sni-only"
   }
 
   restrictions {

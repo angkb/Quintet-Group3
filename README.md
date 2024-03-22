@@ -126,6 +126,7 @@ The DevSecOps approach successfully enhanced the security, efficiency, and colla
 - Foster a continuous learning culture to stay updated on emerging security threats and best practices.
 - Explore opportunities to expand the DevSecOps approach to other projects within the organization.
 
+
 ![Phase3 diagram](./screenshots/phase3.png)
 
 
