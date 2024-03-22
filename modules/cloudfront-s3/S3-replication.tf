@@ -6,7 +6,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "static_web_replica" {
   provider = aws.central
-#checkov:skip=CKV2_AWS_62:This project does not need notification service
+  #checkov:skip=CKV2_AWS_62:This project does not need notification service
   bucket = "quintet-cf-bkt-replica"
   tags = {
     "Project"   = "Use CloudFront with s3"
@@ -17,20 +17,20 @@ resource "aws_s3_bucket" "static_web_replica" {
 
 
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config-replica" {
-#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
+  #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   provider = aws.central
 
   bucket = aws_s3_bucket.static_web_replica.id
 
   rule {
-    id = "ExpireAllObjects"
+    id     = "ExpireAllObjects"
     status = "Enabled"
-    filter{
+    filter {
       tag {
-      key   = "Use CloudFront with s3"
-      value = "Quintet-NTU-Capstone-CE4-Grp3"
+        key   = "Use CloudFront with s3"
+        value = "Quintet-NTU-Capstone-CE4-Grp3"
+      }
     }
-  }
 
     expiration {
       days = 180

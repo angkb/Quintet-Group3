@@ -1,7 +1,6 @@
 # DevSecOps
 ## _Capstone Project, Grp 3 (Quintet)_ 
-### _Project Name: To Be Decide_
-### _Date: To Be Decide_
+### _Date: 23 Mar 2024_
 ### _Author(s):_
 - Ang Kok Beng
 - Joseph Ong
@@ -10,29 +9,49 @@
 - Sagar Ingale
 ____________________________________________________________
 ## _Introduction_
-This README.md details the implementation of a DevSecOps approach for the [To Be Decided] project. It outlines the methodologies, tools, and outcomes achieved by integrating development, security, and operations processes throughout the software development lifecycle (SDLC).
+This README.md details the implementation of a DevSecOps approach for the project. It outlines the methodologies, tools, and outcomes achieved by integrating development, security, and operations processes throughout the software development lifecycle (SDLC).
 ## _Methodology_
-_Our project adopted the following DevSecOps practices:_ 
-**Please update if missed out**
+_Our project adopted the following DevSecOps practices:_
 
 - **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities.
 - **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments.
 - **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments.
-- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning and penetration testing.
+- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning.
 - **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly.
 
-## _Tools and Technologies_
-_Our project utilized various tools and technologies to support the DevSecOps approach:_ **Please update if missed out**
+## Architecture Diagram
 
-- **Computing platform & services:** [AWS Cloud, S3 buckets, DynamoDB, ACM, ACL, SSM, OAI, Cloudfront, Route53 ... ]
+![Architecture diagram](./screenshots/Archi.jpeg)
+
+## _Tools and Technologies_
+_Our project utilized various tools and technologies to support the DevSecOps approach:_
+
+- **Computing platform & services:** [AWS Cloud, S3 buckets, DynamoDB, ACM, ACL, SSM, OAC, Cloudfront, Route53 ... ]
 - **Version control system (VCS):** [GitHub]
 - **CI/CD pipeline tool:** [GitHub Action] 
-- **Security scanning tools:** [OWASP top 10, Checkov, Snyk]
+- **Security scanning tools:** [WAF, Checkov, Snyk]
 - **Static Application Security Testing (SAST):** [Snyk]
 - **Dynamic Application Security Testing (DAST):** [Snyk] 
 - **Infrastructure Security Scanning:** [Checkov & Snyk] 
 - **IaC tools:** [Terraform] 
 - **Communication platforms:** [Slack, Zoom, Microsoft Team]
+
+## Branching Strategies
+
+![Gitflow diagram overview](./screenshots/branching-strategy.png)
+Main (Production) > Development > Features
+
+- Main branch
+
+Production-ready branch for deployment. Branch protection enabled.
+
+- <span style="color: green">Development branch</span>
+
+Code-ready branch with implemented features added via different phases of the project. Branch protection enabled.
+
+- Features branch
+
+Accessible branch to all team members continuously updated with features and upgrades throughout the development stages for debugging for implementation into the development branch.
 
 ## _Outcomes_
 _The implementation of DevSecOps resulted in several positive outcomes:_
@@ -51,7 +70,7 @@ Integrating security tools and processes into existing workflows required initia
 - **Cultural shift:**
 Fostering a culture of shared security responsibility across development, security, and operations teams took time and ongoing communication. Messy start
 
-## Conclusion
+## Conclusion 
 The DevSecOps approach successfully enhanced the security, efficiency, and collaboration within the [Project Name] project. By integrating security considerations throughout the SDLC and leveraging automation tools, the project achieved faster delivery times, improved security posture, and streamlined operations. The lessons learned from this project will be valuable for future endeavors, fostering a secure and efficient software development environment.
 
 ## Next Steps
@@ -72,8 +91,7 @@ Deploy a static website for wellness client in various region.
 Implement security measures 
 https://dynamics.sctp-sandbox.com/
 
-Slides for presentation:
---URL--
+
 ____________________________________________________________
 ## Team consist of:
 - Ang Kok Beng
@@ -180,7 +198,7 @@ ____________________________________________________________
 
 ## Architecture Diagram
 
-![Architecture diagram](/screenshots/Insert Archi Diagram.png)
+![Architecture diagram](./screenshots/Archi.jpeg)
 
 ## Dependencies
 

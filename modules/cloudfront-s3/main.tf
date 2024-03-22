@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "static_web" {
 
-#checkov:skip=CKV2_AWS_62:This project does not need notification service
+  #checkov:skip=CKV2_AWS_62:This project does not need notification service
   bucket = "quintet-cf-bkt"
   tags = {
     "Project"   = "Use CloudFront with s3"
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "log_bucket" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "example" {
-#checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
+  #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.static_web.id
   rule {
     object_ownership = "BucketOwnerPreferred"
@@ -30,19 +30,19 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 }
 
 # create public access block for CKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
- resource "aws_s3_bucket_public_access_block" "static_web" {
-    bucket = aws_s3_bucket.static_web.id
-    block_public_acls       = true
-    block_public_policy     = true
-    ignore_public_acls      = true
-    restrict_public_buckets = true
+resource "aws_s3_bucket_public_access_block" "static_web" {
+  bucket                  = aws_s3_bucket.static_web.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 # encrypt bucket using SSE-S3  -checkov-CKV_AWS_145
 
 resource "aws_kms_key" "mykey" {
   description             = "This key is used to encrypt bucket objects"
-  policy      = <<POLICY
+  policy                  = <<POLICY
   {
     "Version": "2012-10-17",
     "Id": "default",
@@ -59,7 +59,7 @@ resource "aws_kms_key" "mykey" {
     ]
   }
 POLICY
-  enable_key_rotation = true
+  enable_key_rotation     = true
   deletion_window_in_days = 20
 }
 
@@ -68,17 +68,17 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encrypt" {
   rule {
     apply_server_side_encryption_by_default {
       kms_master_key_id = aws_kms_key.mykey.arn
-      sse_algorithm = "aws:kms"
+      sse_algorithm     = "aws:kms"
     }
   }
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
-#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
+  #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   bucket = aws_s3_bucket.static_web.id
 
   rule {
-    id = "ExpireAllObjects"
+    id     = "ExpireAllObjects"
     status = "Enabled"
 
     expiration {
@@ -103,7 +103,7 @@ resource "aws_s3_bucket_versioning" "versioning" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
-#checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
+  #checkov:skip=CKV_AWS_300: "Ensure S3 lifecycle configuration sets period for aborting failed uploads"
   # Must have bucket versioning enabled first
   depends_on = [aws_s3_bucket_versioning.versioning]
 
@@ -139,19 +139,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "versioning-bucket-config" {
 }
 
 resource "aws_s3_bucket" "versioning_bucket" {
-#checkov:skip=CKV2_AWS_62:This project does not need notification service
+  #checkov:skip=CKV2_AWS_62:This project does not need notification service
   bucket = "quintet-versioning-bucket"
 }
 
 resource "aws_s3_bucket_public_access_block" "access_good" {
   bucket = aws_s3_bucket.versioning_bucket.id
 
-  block_public_acls = true
+  block_public_acls   = true
   block_public_policy = true
 }
 
 resource "aws_s3_bucket_ownership_controls" "versioning" {
-#checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
+  #checkov:skip=CKV2_AWS_65: "Ensure access control lists for S3 buckets are disabled"
   bucket = aws_s3_bucket.versioning_bucket.id
   rule {
     object_ownership = "BucketOwnerPreferred"
@@ -178,8 +178,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   # logging cloudfront distribution: -checkov-CKV_AWS_86
   logging_config {
     include_cookies = false
-    bucket          = "quintet-cf-bkt-log123"
-    # prefix          = "log"
+    bucket          = "quintet-cf-bkt-log-01.s3.amazonaws.com"
+    prefix          = "log"
   }
 
   origin_group {
@@ -221,10 +221,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = var.acm_certificate_arn
-    ssl_support_method  = "sni-only"
+    acm_certificate_arn            = var.acm_certificate_arn
+    ssl_support_method             = "sni-only"
     cloudfront_default_certificate = false
-    minimum_protocol_version = "TLSv1.2_2018"
+    minimum_protocol_version       = "TLSv1.2_2018"
   }
 
   restrictions {
