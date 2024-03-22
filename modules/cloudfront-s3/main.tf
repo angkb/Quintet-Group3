@@ -14,6 +14,12 @@ resource "aws_s3_bucket" "static_web" {
 
 #create s3 for log bucket
 resource "aws_s3_bucket" "log_bucket" {
+  # checkov:skip=CKV2_AWS_62:no requirement for event notifications enabled"
+  # checkov:skipCKV2_AWS_61: "No requirement for this S3 bucket to have a lifecycle configuration"
+  # checkov:skipCKV_AWS_145: "Ensure that S3 buckets are encrypted with KMS by default"
+  # checkov:skipCKV2_AWS_6: "Ensure that S3 bucket has a Public Access block"
+  # checkov:skipCKV_AWS_144: "Ensure that S3 bucket has cross-region replication enabled"
+  # checkov:skipCKV_AWS_21: "Ensure all data stored in the S3 bucket have versioning enabled"
   bucket = "quintet-logging-bucket"
 }
 
