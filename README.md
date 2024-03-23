@@ -12,41 +12,45 @@ This README.md details the implementation of a DevSecOps approach for the projec
 
 ## _Introduction_ _ SAGAR
 
-DevSecOps is the seamless integration of security with two other disciplines: devlopment and operations. Main purpose is to build security into the Continuous Integration and Continuos Delivery (CI/CD) pipeline. Enabling fast and secure software releases, while rapidly detecting and responding to security flaws (vulnerabilities - such as Cross-site Scriping, Broken Access Control, SQL Injection, Insecure Sesign, Poor Data Sanitization and others mentioned in OWASP).
+DevSecOps is the seamless integration of security with two other disciplines: development and operations. The main purpose is to build security into the Continuous Integration and Continuous Delivery (CI/CD) pipeline. Enabling fast and secure software releases, while rapidly detecting and responding to security flaws (vulnerabilities - such as Cross-site Scripting, Broken Access Control, SQL Injection, Insecure Sesign, Poor Data Sanitization and others mentioned in OWASP).
 
 
-Deploy a static website for wellness client in various region.
+Deploy a static website for wellness clients in various regions.
 
-https://dynamics.sctp-sandbox.com/ (tobeupdated)
+https://dynamics.sctp-sandbox.com/
 
 ## Quintet wellness and Healthcare _SAGAR
 
-Providing wellness and healthcare services to you at your doorstep, at comfort place.
+Providing wellness and healthcare services to you at your doorstep, at the comfort of your own place.
 
-We provide various exercise and wellness programmes for individuals and for group/corporate activities.
-We also here to provide nursing services and confinement services in near future.
+We provide various exercise and wellness programmes for individuals and group/corporate activities.
+We are also here to provide nursing services and confinement services soon.
 
 Our highly qualified team will help you to achieve your goals with structured, scientific and fun classes, workshops and events.
 
 Please follow us on our Instagram and contact us to book our services now. ❤️
 
 PS
-We can add testimonial/kind words about company services and experiences from
+We can add testimonials/kind words about company services and experiences from
 customers
 
 
 ## _Methodology__ SAGAR
 _Our project adopted the following DevSecOps practices:_
 
-- **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities.
-- **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments.
-- **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments.
-- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning.
-- **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly.
+- **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities. The practice of moving testing, quality, and performance evaluation early in the development process, often before any code is written.
+- **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments. (GitHub Action)
+- **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments. (Terraform)
+- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning. (Snyk & Checkov)
+- **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly. (Slack, Zoom, Teams)
 
 
 ## Architecture Diagram _LIM WJ
+
+
+
 Base Architecture (Customer's Features)
+
 ![Architecture diagram](./screenshots/phase1.png)
 
 
@@ -117,9 +121,9 @@ _The implementation of DevSecOps resulted in several positive outcomes:_
 _Challenger(s) encountered:_
 
 - **Initial integration complexity:**
-Integrating security tools and processes into existing workflows required initial effort and adaptation.
+Integrating security tools and processes into existing workflows required initial effort and adaptation. (mess up TF Statefile and had to create new repo)
 - **Cultural shift:**
-Fostering a culture of shared security responsibility across development, security, and operations teams took time and ongoing communication. Messy start
+Fostering a culture of shared security responsibility across development, security, and operations teams took some time and ongoing communication. Initially was a mess... But, did make us validate our individual codes, ensure security of secrets and think about reducing risk before pushing to repo..
 
 ## Conclusion _RAYMOND
 The DevSecOps approach successfully enhanced the security, efficiency, and collaboration within the [Project Name] project. By integrating security considerations throughout the SDLC and leveraging automation tools, the project achieved faster delivery times, improved security posture, and streamlined operations. The lessons learned from this project will be valuable for future endeavors, fostering a secure and efficient software development environment.
