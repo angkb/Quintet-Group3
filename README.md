@@ -12,26 +12,26 @@ This README.md details the implementation of a DevSecOps approach for the projec
 
 ## _Introduction_ _ SAGAR
 
-DevSecOps is the seamless integration of security with two other disciplines: devlopment and operations. Main purpose is to build security into the Continuous Integration and Continuos Delivery (CI/CD) pipeline. Enabling fast and secure software releases, while rapidly detecting and responding to security flaws (vulnerabilities - such as Cross-site Scriping, Broken Access Control, SQL Injection, Insecure Sesign, Poor Data Sanitization and others mentioned in OWASP).
+DevSecOps is the seamless integration of security with two other disciplines: development and operations. The main purpose is to build security into the Continuous Integration and Continuous Delivery (CI/CD) pipeline. Enabling fast and secure software releases, while rapidly detecting and responding to security flaws (vulnerabilities - such as Cross-site Scripting, Broken Access Control, SQL Injection, Insecure Sesign, Poor Data Sanitization and others mentioned in OWASP).
 
 
-Deploy a static website for wellness client in various region.
+Deploy a static website for wellness clients in various regions.
 
 https://dynamics.sctp-sandbox.com/
 
 ## Quintet wellness and Healthcare _SAGAR
 
-Providing wellness and healthcare services to you at your doorstep, at comfort place.
+Providing wellness and healthcare services to you at your doorstep, at the comfort of your own place.
 
-We provide various exercise and wellness programmes for individuals and for group/corporate activities.
-We also here to provide nursing services and confinement services in near future.
+We provide various exercise and wellness programmes for individuals and group/corporate activities.
+We are also here to provide nursing services and confinement services soon.
 
 Our highly qualified team will help you to achieve your goals with structured, scientific and fun classes, workshops and events.
 
 Please follow us on our Instagram and contact us to book our services now. ❤️
 
 PS
-We can add testimonial/kind words about company services and experiences from
+We can add testimonials/kind words about company services and experiences from
 customers
 
 
@@ -46,7 +46,11 @@ _Our project adopted the following DevSecOps practices:_
 
 
 ## Architecture Diagram _LIM WJ
+
+
+
 Base Architecture (Customer's Features)
+
 ![Architecture diagram](./screenshots/phase1.png)
 
 
