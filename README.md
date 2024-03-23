@@ -39,10 +39,10 @@ customers
 _Our project adopted the following DevSecOps practices:_
 
 - **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities.
-- **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments.
-- **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments.
-- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning.
-- **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly.
+- **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments. (GitHub Action)
+- **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments. (Terraform)
+- **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning. (Snyk & Checkov)
+- **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly. (Slack, Zoom, Teams)
 
 
 ## Architecture Diagram _LIM WJ
