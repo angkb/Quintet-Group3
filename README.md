@@ -46,8 +46,13 @@ _Our project adopted the following DevSecOps practices:_
 
 
 ## Architecture Diagram _LIM WJ
+Base Architecture (Customer's Features)
+![Architecture diagram](./screenshots/phase1.png)
 
-![Architecture diagram](./screenshots/Archi.jpeg)
+
+
+Final Architecture (CICD + Security)
+![Architecture diagram](./screenshots/phase2.png)
 
 
 ## Debugging _LIM WJ
