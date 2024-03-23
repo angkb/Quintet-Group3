@@ -1,0 +1,28 @@
+name: Checkov Analysis
+run-name: ${{ github.actor }} is running Checkov on the ${{ github.ref }} branch for ${{ github.repository }} repository.
+
+on:
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  Checkov:
+    runs-on: ubuntu-latest
+    # strategy:
+    #   matrix: { dir: ["modules", "prd", "dynamoDB"] }
+
+    # defaults:
+    #   run:
+        # working-directory: modules
+        # working-directory: ${{ matrix.dir }}
+        
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Checkov analysis
+      id: checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: terraform
