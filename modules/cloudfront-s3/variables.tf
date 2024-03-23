@@ -1,21 +1,15 @@
-variable "region" {
-  description = "The aws region to use"
+variable "acm_certificate_arn" {
   type        = string
-  default     = "us-east-1"
+  description = "ACM cert ARN"
 }
 
-variable "bucket_prefix" {
-  description = "The prefix for the s3 bucket name"
-  type        = string
-  default     = "cf-s3-website-"
+variable "aliases" {
+  type        = list(any)
+  description = "Alternate domain names"
+  default     = []
 }
 
-variable "domain_name" {
-  description = "The domain name to use"
+variable "web_acl_id" {
   type        = string
-  default     = "sctp-sandbox.com"
-}
-
-locals {
-  website_domain = "dynamics.${var.domain_name}"
+  description = "Web ACL arn of WAF"
 }
