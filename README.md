@@ -17,7 +17,7 @@ DevSecOps is the seamless integration of security with two other disciplines: de
 
 Deploy a static website for wellness client in various region.
 
-https://dynamics.sctp-sandbox.com/ (to be updated)
+https://dynamics.sctp-sandbox.com/
 
 ## Quintet wellness and Healthcare _SAGAR
 
