@@ -51,6 +51,7 @@ _Our project adopted the following DevSecOps practices:_
 
 Base Architecture (Customer's Features)
 
+
 ![Architecture diagram](./screenshots/phase1.png)
 
 
