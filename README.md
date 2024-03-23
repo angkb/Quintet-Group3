@@ -38,7 +38,7 @@ customers
 ## _Methodology__ SAGAR
 _Our project adopted the following DevSecOps practices:_
 
-- **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities.
+- **Shift Left Security:** Security considerations were integrated from the initial planning stages, ensuring early identification and mitigation of vulnerabilities. The practice of moving testing, quality, and performance evaluation early in the development process, often before any code is written.
 - **Continuous Integration and Continuous Delivery (CI/CD):** An automated pipeline was established to continuously integrate code changes, run security scans, and deploy builds to testing and production environments. (GitHub Action)
 - **Infrastructure as Code (IaC)**: Infrastructure configurations were managed as code, enabling consistent and secure deployments across environments. (Terraform)
 - **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning. (Snyk & Checkov)
