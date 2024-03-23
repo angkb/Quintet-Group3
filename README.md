@@ -17,7 +17,7 @@ DevSecOps is the seamless integration of security with two other disciplines: de
 
 Deploy a static website for wellness client in various region.
 
-https://dynamics.sctp-sandbox.com/ (tobeupdated)
+https://dynamics.sctp-sandbox.com/ (to be updated)
 
 ## Quintet wellness and Healthcare _SAGAR
 
@@ -117,9 +117,9 @@ _The implementation of DevSecOps resulted in several positive outcomes:_
 _Challenger(s) encountered:_
 
 - **Initial integration complexity:**
-Integrating security tools and processes into existing workflows required initial effort and adaptation.
+Integrating security tools and processes into existing workflows required initial effort and adaptation. (mess up TF Statefile and had to create new repo)
 - **Cultural shift:**
-Fostering a culture of shared security responsibility across development, security, and operations teams took time and ongoing communication. Messy start
+Fostering a culture of shared security responsibility across development, security, and operations teams took some time and ongoing communication. Initially was a mess... But, did make us validate our individual codes, ensure security of secrets and think about reducing risk before pushing to repo..
 
 ## Conclusion _RAYMOND
 The DevSecOps approach successfully enhanced the security, efficiency, and collaboration within the [Project Name] project. By integrating security considerations throughout the SDLC and leveraging automation tools, the project achieved faster delivery times, improved security posture, and streamlined operations. The lessons learned from this project will be valuable for future endeavors, fostering a secure and efficient software development environment.
