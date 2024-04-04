@@ -44,6 +44,20 @@ _Our project adopted the following DevSecOps practices:_
 - **Security Automation:** Security testing tools were integrated into the CI/CD pipeline to automate vulnerability scanning. (Snyk & Checkov)
 - **Collaboration and Communication:** Regular communication and collaboration between development, security, and operations teams were fostered to ensure alignment and address security concerns promptly. (Slack, Zoom, Teams)
 
+## Motive:
+_Uber, the world’s largest taxi company, **owns no vehicles.**_
+
+_Facebook, the world’s most popular media owner, **creates no content.**_
+
+_Alibaba, the most valuable retailer, **has no inventory.**_
+
+_And Airbnb, the world’s largest accommodation provider, **owns no real estate.**_
+Something interesting is happening.
+
+_our aim is to become largest Wellness and fitness provider who **owns zero Gym, spa or wellness clubs/centres.**_
+
+_Presently there are almost zero companies in this domain._
+
 
 ## Architecture Diagram _LIM WJ
 
